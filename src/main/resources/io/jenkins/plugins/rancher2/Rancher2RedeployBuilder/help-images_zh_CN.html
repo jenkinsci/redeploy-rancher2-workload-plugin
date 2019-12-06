@@ -1,0 +1,10 @@
+<div>
+    设置image为你想要的版本。如果你的image版本是latest或者设置了imagePullPolicy="Always"，那么可以忽略这个配置项<br>
+    如果要更新多个Image，可以用英文分号(;)进行分隔,例如：
+    <p>
+        nginx;nginx:1.0;myteam/myproject:v2.0;docker.io/team/image:v1.0.${BUILD_NUMBER}
+    </p>
+    这个插件会更新工作负载中的所有镜像，且按镜像名称严格进行匹配，版本部分直接使用你设置的。如果你的imagePullPolicy不是"Always"，那么
+    你可能需要动态生成Image的版本号才能触发更新。
+    <br>
+</div>

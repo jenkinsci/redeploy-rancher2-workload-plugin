@@ -1,0 +1,10 @@
+<div>
+    update image version to your excepted. optional if you use latest as image version or imagePullPolicy="Always"<br>
+    you can use semicolon(;) to split multiple images, eg:
+    <p>
+        nginx;nginx:1.0;myteam/myproject:v2.0;docker.io/team/image:v1.0.${BUILD_NUMBER}
+    </p>
+    this plugin will update all images in this workload by <b>match the name part exactly</b>, and simply set version part as you specified.
+    so you may need Jenkins variables to dynamic generate new version number.
+    <br>
+</div>

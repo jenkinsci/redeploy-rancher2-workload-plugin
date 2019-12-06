@@ -1,0 +1,17 @@
+<div>
+    <p>
+        since Rancher2.x deny to list cluster by name if your token scope is single cluster.<br>
+        <b>Note: ClusterId is NOT cluster name. </b>
+    </p>
+    <p>
+        in Rancher2.x "Add API Key" dialog, please check carefully about "Scope" drop-down. <br>
+        the ClusterId is in brackets after cluster name. <br>
+        eg: mycluster ( c-h4hxd ), the ClusterId is <b>c-h4hxd</b>
+    </p>
+    <p>
+        besides, you can find this id in browser address box when you click "Cluster" menu in Rancher2.x Web UI.
+    </p>
+    <p>
+        if you omit this value, you must specify "clusterName" or "clusterId" in your build arguments.
+    </p>
+</div>
