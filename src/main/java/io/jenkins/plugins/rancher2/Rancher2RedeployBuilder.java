@@ -112,6 +112,9 @@ public class Rancher2RedeployBuilder extends Builder implements SimpleBuildStep 
         }
         try (CloseableHttpClient client = ClientBuilder.create(endpoint, credential.isTrustCert())) {
             String url = endpoint + envVars.expand(workload);
+            if (url.startsWith("/p/")) {
+                url = url.replaceFirst("/p/", "/project/");
+            }
             HttpUriRequest request = RequestBuilder.get(url)
                     .addHeader("Authorization", "Bearer " + credential.getBearerToken())
                     .addHeader("Accept", "application/json")
@@ -198,7 +201,7 @@ public class Rancher2RedeployBuilder extends Builder implements SimpleBuildStep 
             if (StringUtils.isBlank(value)) {
                 return FormValidation.error(Messages.Rancher2RedeployBuilder_DescriptorImpl_requireWorkloadPath());
             }
-            if (!value.startsWith("/project")) {
+            if (!value.startsWith("/project") && !value.startsWith("/p/")) {
                 return FormValidation.error(Messages.Rancher2RedeployBuilder_DescriptorImpl_startWithProject());
             }
             return FormValidation.ok();

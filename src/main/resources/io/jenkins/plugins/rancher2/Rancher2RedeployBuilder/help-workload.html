@@ -1,6 +1,11 @@
 <div>
     you can find your workload API path in Rancher2.x web UI-->Cluster->Project->Resources->Workloads, <br>
-    click the menu icon and select "View in API", will open in new browser tab. copy url to here. <br>
-    since endpoint part has bean set in Credential, you only need specify path from "/project", eg: <br>
-    /project/c-h4hxd:p-c9j8z/workloads/deployment:default:busybox
+    copy the workload link address, eg:
+    http://localhost/p/c-h4hxd:p-dwqfr/workload/deployment:jenkins:jenkins <br>
+    or click the menu icon and select "View in API", will open in new browser tab. copy that url to here. <br>
+    <p>
+    since endpoint part has bean set in Credential, you only need specify path from "/p/" or "/project", eg: <br>
+    <b>/project/c-h4hxd:p-c9j8z/workloads/deployment:default:busybox </b><br>
+    or <b>/p/c-h4hxd:p-dwqfr/workload/deployment:jenkins:jenkins </b>
+    </p>
 </div>
