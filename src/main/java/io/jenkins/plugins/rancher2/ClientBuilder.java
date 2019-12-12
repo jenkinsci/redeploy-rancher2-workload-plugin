@@ -19,6 +19,13 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 public class ClientBuilder {
+
+    /**
+     * create HttpClient to support self-signed SSL Certification
+     * @param endpoint
+     * @param trustAll
+     * @return
+     */
     public static CloseableHttpClient create(String endpoint, boolean trustAll) {
         if (endpoint.startsWith("https") && trustAll) {
             HttpClientBuilder builder = HttpClientBuilder.create();

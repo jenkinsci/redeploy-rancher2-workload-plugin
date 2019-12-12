@@ -1,11 +1,11 @@
 package io.jenkins.plugins.rancher2;
 
-import com.cloudbees.plugins.credentials.CredentialsDescriptor;
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.impl.BaseStandardCredentials;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.util.FormValidation;
+import jenkins.model.Jenkins;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.verb.POST;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -94,11 +95,12 @@ public class Rancher2CredentialsImpl extends BaseStandardCredentials implements 
             return FormValidation.ok();
         }
 
+        @POST
         public FormValidation doTestConnection(
                 @QueryParameter("endpoint") final String endpoint,
                 @QueryParameter("trustCert") boolean trustCert,
                 @QueryParameter("bearerToken") final String bearerToken) throws IOException, ServletException {
-
+            Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
             FormValidation validation = doCheckEndpoint(endpoint);
             if (validation.kind == FormValidation.Kind.ERROR) {
                 return validation;
