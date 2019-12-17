@@ -21,10 +21,11 @@
           ~ stapler-plugin.version: The Stapler Maven plugin version required by the plugin.
      -->
     </properties>
-    <name>Redeploy Rancher2.x Workload</name>
+    <name>Redeploy Rancher2.x Workload Plugin</name>
     <description>
-        A Jenkins plugin to redeploy Rancher2.x workload
+        Redeploy an existing Rancher2.x workload via Rancher2 API
     </description>
+    <url>https://github.com/jenkinsci/redeploy-rancher2-workload-plugin</url>
     <!-- The default licence for Jenkins OSS Plugins is MIT. Substitute for the applicable one if needed. -->
     <licenses>
         <license>
@@ -32,6 +33,13 @@
             <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <id>feg545</id>
+            <name>Fulai Zhang</name>
+            <email>feg545@qq.com</email>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>

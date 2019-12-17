@@ -113,7 +113,7 @@ public class Rancher2RedeployBuilder extends Builder implements SimpleBuildStep 
         try (CloseableHttpClient client = ClientBuilder.create(endpoint, credential.isTrustCert())) {
             String url = endpoint + envVars.expand(workload);
             if (url.startsWith("/p/")) {
-                url = url.replaceFirst("/p/", "/project/");
+                url = url.replaceFirst("/p/", "/project/").replaceFirst("/workload/", "/workloads/");
             }
             HttpUriRequest request = RequestBuilder.get(url)
                     .addHeader("Authorization", "Bearer " + credential.getBearerToken())
