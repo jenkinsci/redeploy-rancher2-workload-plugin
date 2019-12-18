@@ -9,7 +9,7 @@
     </parent>
     <groupId>io.jenkins.plugins</groupId>
     <artifactId>redeploy-rancher2-workload</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>hpi</packaging>
     <properties>
         <!-- Baseline Jenkins version you use to build the plugin. Users must have this version or newer to run. -->
@@ -43,7 +43,7 @@
         <connection>scm:git:https://github.com/jenkinsci/redeploy-rancher2-workload-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/redeploy-rancher2-workload-plugin.git        </developerConnection>
         <url>https://github.com/jenkinsci/redeploy-rancher2-workload-plugin</url>
-        <tag>master</tag>
+        <tag>redeploy-rancher2-workload-1.0.1</tag>
     </scm>
 
     <dependencies>
