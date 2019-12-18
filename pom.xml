@@ -40,6 +40,17 @@
             <email>feg545@qq.com</email>
         </developer>
     </developers>
+    <scm>
+        <connection>
+            scm:git:ssh://github.com:jenkinsci/redeploy-rancher2-workload-plugin.git
+        </connection>
+        <developerConnection>
+            scm:git:ssh://github.com:jenkinsci/redeploy-rancher2-workload-plugin.git
+        </developerConnection>
+        <url>
+            https://github.com/jenkinsci/redeploy-rancher2-workload-plugin
+        </url>
+    </scm>
 
     <dependencies>
         <dependency>
