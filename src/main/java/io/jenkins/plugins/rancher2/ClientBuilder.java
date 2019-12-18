@@ -22,9 +22,9 @@ public class ClientBuilder {
 
     /**
      * create HttpClient to support self-signed SSL Certification
-     * @param endpoint
-     * @param trustAll
-     * @return
+     * @param endpoint rancher API url
+     * @param trustAll skip SSL validation
+     * @return http client
      */
     public static CloseableHttpClient create(String endpoint, boolean trustAll) {
         if (endpoint.startsWith("https") && trustAll) {

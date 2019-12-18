@@ -238,15 +238,17 @@ public class Rancher2RedeployBuilder extends Builder implements SimpleBuildStep 
             StandardListBoxModel result = new StandardListBoxModel();
             if (item == null) {
                 if (!Jenkins.getInstance().hasPermission(Jenkins.ADMINISTER)) {
-                    return result.includeCurrentValue(credential); // (2)
+                    return result.includeCurrentValue(credential);
                 }
-            } else {
-                if (!item.hasPermission(Item.EXTENDED_READ)
-                        && !item.hasPermission(CredentialsProvider.USE_ITEM)) {
-                    return result.includeCurrentValue(credential); // (2)
-                }
+                return result;
             }
-            return result.includeMatchingAs(null, item, Rancher2Credentials.class, null, CredentialsMatchers.always()); // (5)
+
+            if (!item.hasPermission(Item.EXTENDED_READ)
+                    && !item.hasPermission(CredentialsProvider.USE_ITEM)) {
+                return result.includeCurrentValue(credential);
+            }
+
+            return result.includeMatching(item, Rancher2Credentials.class, Collections.<DomainRequirement>emptyList(), CredentialsMatchers.always()); // (5)
         }
 
         public FormValidation doCheckCredential(
