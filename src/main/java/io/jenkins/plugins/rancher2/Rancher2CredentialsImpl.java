@@ -5,6 +5,7 @@ import com.cloudbees.plugins.credentials.impl.BaseStandardCredentials;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.util.FormValidation;
+import hudson.util.Secret;
 import jenkins.model.Jenkins;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -25,7 +26,7 @@ import java.net.URL;
 public class Rancher2CredentialsImpl extends BaseStandardCredentials implements Rancher2Credentials {
     private String endpoint;
     private boolean trustCert;
-    private final String bearerToken;
+    private final Secret bearerToken;
 
     @DataBoundConstructor
     public Rancher2CredentialsImpl(
@@ -33,7 +34,7 @@ public class Rancher2CredentialsImpl extends BaseStandardCredentials implements 
             @CheckForNull String id,
             @NonNull String endpoint,
             boolean trustCert,
-            @NonNull String bearerToken,
+            @NonNull Secret bearerToken,
             String description) {
         super(scope, id, description);
         this.endpoint = endpoint;
@@ -53,7 +54,7 @@ public class Rancher2CredentialsImpl extends BaseStandardCredentials implements 
 
     @Override
     public String getBearerToken() throws IOException, InterruptedException {
-        return bearerToken;
+        return bearerToken.getPlainText();
     }
 
     @Extension
@@ -99,20 +100,20 @@ public class Rancher2CredentialsImpl extends BaseStandardCredentials implements 
         public FormValidation doTestConnection(
                 @QueryParameter("endpoint") final String endpoint,
                 @QueryParameter("trustCert") boolean trustCert,
-                @QueryParameter("bearerToken") final String bearerToken) throws IOException, ServletException {
+                @QueryParameter("bearerToken") final Secret bearerToken) throws IOException, ServletException {
             Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
             FormValidation validation = doCheckEndpoint(endpoint);
             if (validation.kind == FormValidation.Kind.ERROR) {
                 return validation;
             }
-            validation = doCheckBearerToken(bearerToken);
+            validation = doCheckBearerToken(bearerToken.getPlainText());
             if (validation.kind == FormValidation.Kind.ERROR) {
                 return validation;
             }
 
             try (CloseableHttpClient client = ClientBuilder.create(endpoint, trustCert)) {
                 RequestBuilder requestBuilder = RequestBuilder.get(endpoint + (endpoint.endsWith("/") ? "projects" : "/projects"));
-                requestBuilder.addHeader("Authorization", "Bearer " + bearerToken);
+                requestBuilder.addHeader("Authorization", "Bearer " + bearerToken.getPlainText());
                 HttpUriRequest request = requestBuilder.build();
                 CloseableHttpResponse response = client.execute(request);
                 if (response.getStatusLine().getStatusCode() == 200) {
