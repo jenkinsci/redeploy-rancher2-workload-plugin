@@ -5,7 +5,7 @@ A simple Jenkins plugin to redeploy Rancher2.x workload
 
 ## Prerequisite
 
-- Jenkins version >= 2.7.3
+- Jenkins version >= 2.164.1
 - Rancher version >= 2.0
 - Jenkins Credentials Plugin >= 2.1.19
 
