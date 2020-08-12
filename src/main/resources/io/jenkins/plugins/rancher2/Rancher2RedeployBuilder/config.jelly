@@ -3,13 +3,13 @@
     <f:entry field="credential" title="${%Credentials}">
        <c:select includeUser="true"/>
     </f:entry>
-    <f:entry title="${%Workload API Path}" field="workload">
+    <f:entry title="${%WorkloadAPIPath}" field="workload">
         <f:textbox />
     </f:entry>
-    <f:entry title="${%Always Pull Image}" field="alwaysPull">
+    <f:entry title="${%AlwaysPullImage}" field="alwaysPull">
         <f:checkbox />
     </f:entry>
-    <f:entry title="${%Update Images}" field="images">
+    <f:entry title="${%UpdateImages}" field="images">
         <f:textbox />
     </f:entry>
 </j:jelly>
