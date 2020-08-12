@@ -39,10 +39,15 @@
             <name>Fulai Zhang</name>
             <email>feg545@qq.com</email>
         </developer>
+        <developer>
+            <id>hicjcn</id>
+            <name>Jian Chen</name>
+            <email>hicjcn@gmail.com</email>
+        </developer>
     </developers>
     <scm>
         <connection>scm:git:https://github.com/jenkinsci/redeploy-rancher2-workload-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/redeploy-rancher2-workload-plugin.git        </developerConnection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/redeploy-rancher2-workload-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/redeploy-rancher2-workload-plugin</url>
         <tag>master</tag>
     </scm>

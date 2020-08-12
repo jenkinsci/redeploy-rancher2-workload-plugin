@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import hudson.*;
 import hudson.model.Item;
+import hudson.security.ACL;
 import hudson.util.FormValidation;
 import hudson.model.AbstractProject;
 import hudson.model.Run;
@@ -237,18 +238,18 @@ public class Rancher2RedeployBuilder extends Builder implements SimpleBuildStep 
         ) {
             StandardListBoxModel result = new StandardListBoxModel();
             if (item == null) {
-                if (!Jenkins.getInstance().hasPermission(Jenkins.ADMINISTER)) {
+                if (!Jenkins.get().hasPermission(Jenkins.ADMINISTER)) {
                     return result.includeCurrentValue(credential);
                 }
-                return result;
+            } else {
+                if (!item.hasPermission(Item.EXTENDED_READ)
+                        && !item.hasPermission(CredentialsProvider.USE_ITEM)) {
+                    return result.includeCurrentValue(credential);
+                }
             }
 
-            if (!item.hasPermission(Item.EXTENDED_READ)
-                    && !item.hasPermission(CredentialsProvider.USE_ITEM)) {
-                return result.includeCurrentValue(credential);
-            }
-
-            return result.includeMatching(item, Rancher2Credentials.class, Collections.<DomainRequirement>emptyList(), CredentialsMatchers.always()); // (5)
+            return CredentialsProvider.listCredentials(Rancher2Credentials.class,
+                    Jenkins.get(), ACL.SYSTEM, Collections.<DomainRequirement>emptyList(), null);
         }
 
         public FormValidation doCheckCredential(
