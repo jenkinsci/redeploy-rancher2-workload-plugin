@@ -249,7 +249,7 @@ public class Rancher2RedeployBuilder extends Builder implements SimpleBuildStep 
             }
 
             return CredentialsProvider.listCredentials(Rancher2Credentials.class,
-                    Jenkins.get(), ACL.SYSTEM, Collections.<DomainRequirement>emptyList(), null);
+                    Jenkins.get(), ACL.SYSTEM, Collections.<DomainRequirement>emptyList(), CredentialsMatchers.always());
         }
 
         public FormValidation doCheckCredential(
